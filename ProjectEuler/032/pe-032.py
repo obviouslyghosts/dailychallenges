@@ -12,3 +12,16 @@ be written as a 1 through 9 pandigital.
 HINT: Some products can be obtained in more than one way so be sure to only
 include it once in your sum.
 """
+
+
+# 1 through 999 twice, multiplied, check answer
+
+def checkPanDigital ( v ):
+    s = str(v)
+    if len(s) > 9 : return False
+
+    for i in range(1,9):
+        # if multiple exist, return false
+        # if none exists, return false
+
+    return True
