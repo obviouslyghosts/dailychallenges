@@ -21,7 +21,6 @@ def checkPanDigital ( v ):
     if len(s) > 9 : return False
 
     for i in range(1,9):
-        # if multiple exist, return false
-        # if none exists, return false
-
+        if not (len([x for x in s if x == str(i)]) == 1):
+            return False
     return True
