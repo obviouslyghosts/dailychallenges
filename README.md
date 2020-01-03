@@ -1,2 +1,2 @@
 # dailychallenges
-daily code challenges
+Personal solutions to code challenges
