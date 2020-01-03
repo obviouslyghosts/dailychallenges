@@ -13,14 +13,27 @@ HINT: Some products can be obtained in more than one way so be sure to only
 include it once in your sum.
 """
 
-
-# 1 through 999 twice, multiplied, check answer
-
-def checkPanDigital ( v ):
+def checkPanDigital ( v, b ):
     s = str(v)
-    if len(s) > 9 : return False
-
-    for i in range(1,9):
+    if len(s) > b-1 : return False
+    for i in range(1,b):
         if not (len([x for x in s if x == str(i)]) == 1):
             return False
     return True
+
+ans = set()
+limit = 99999 ## probably don't need to go higher than this
+digits = 10 # 1-9
+
+for a in range(1,limit):
+    ## second loop:
+    ## set lower bound to a, to remove duplicates
+    ## set upper bound with consideration to digit count of a
+    z = 10**(len(str(a))-1)
+    for b in range(a,limit//z): 
+        c = a*b
+        if checkPanDigital(str(a)+str(b)+str(c), digits):
+            print(a,b,c)
+            ans.add(c)
+print(ans)
+print(sum(ans))
