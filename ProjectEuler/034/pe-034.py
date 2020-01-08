@@ -25,8 +25,8 @@ Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 """
 
 facts = dict()
-lowerLimit = 500000
-upperLimit = 600000
+lowerLimit = 3
+upperLimit = 1000000
 
 def getFactorial(f):
     if f in facts:
@@ -51,7 +51,7 @@ solutions = list()
 ##    if ans > i:
 ##        print("too big")
 ##        c = str( int(s[0])+1 )
-##        
+##
 ##        if s[0]=="0": s = "1"+s
 ##        i = int(s)
 ##    else:
@@ -59,8 +59,8 @@ solutions = list()
 ##            print("MATCH!")
 ##            solutions.append(ans)
 ##        i+=1
-##            
-        
+##
+
 for i in range(lowerLimit, upperLimit,5):
     if i%100000 == 0: print(i)
     ans = 0
