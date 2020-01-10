@@ -6,74 +6,45 @@ factorial of their digits.
 
 Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
-0 1
-1 1
-2 2
-3 6
-4 24
-5 120
-6 720
-7 5040
-8 40320
-9 362880
-
-145
-40585
-
-3000000 = 7d
-
+*****
+upper bound:
+99999999 == 8*(9!) == 2903040
+2903040 is 7 digits long, but requires an 8 digit number to create.
+Every digit greater than 99999999 will then be less digits than it took
+to produce.
 """
 
-facts = dict()
+facts = dict() # only calculate the factorials of 0-9 once
 lowerLimit = 3
-upperLimit = 1000000
+upperLimit = "99999999"
 
 def getFactorial(f):
-    if f in facts:
-        #print("cached")
-        return facts[f]
+    # return cached factorial if it exists
+    if f in facts: return facts[f]
     t = 1
-    for i in range(1,f+1):
-        t*=i
-    facts[f] = t
+    for i in range(1,f+1): t*=i
+    facts[f] = t # chache it
     return facts[f]
 
+# set the upper limit
+a = 0
+for v in upperLimit:
+    a += getFactorial(int(v))
+upperLimit = a
 
 solutions = list()
-##i = lowerLimit
-##while i < upperLimit:
-##    if i%100000 == 0: print(i)
-##    ans = 0
-##    s = str(i)
-##    for v in s:
-##        ans += getFactorial(int(v))
-##    print(i, ans)
-##    if ans > i:
-##        print("too big")
-##        c = str( int(s[0])+1 )
-##
-##        if s[0]=="0": s = "1"+s
-##        i = int(s)
-##    else:
-##        if ans == i:
-##            print("MATCH!")
-##            solutions.append(ans)
-##        i+=1
-##
 
-for i in range(lowerLimit, upperLimit,5):
-    if i%100000 == 0: print(i)
+for i in range(lowerLimit, upperLimit):
+    if i%100000 == 0: print(i) # follow along!
     ans = 0
     s = str(i)
     for v in s:
         ans += getFactorial(int(v))
-    print(i, ans)
     if ans == i:
         print("MATCH!")
         solutions.append(ans)
 
-if len(solutions) > 0:
-    for s in solutions:
-        print(s)
-else:
+if len(solutions) < 0:
     print("no matchs :(")
+else:
+    print("the solution is: %s" % (sum(solutions)))
