@@ -7,13 +7,37 @@ How many circular primes are there below one million?
 """
 
 limit = 1_000_000 #million
-answers = list()
+answers = {2} #start with 2
 
-# count up to limit
-# check if in answers - skip if it is
-# check if prime
-# if prime, offset by one and recheck
-# if back at begining, save to answer list
-## (save all of them!)
 
+def primeCheck(n):
+    ## even check
+    if n%2<1: return False
+    ## only check below square root!
+    l = int(n**0.5)+1
+    for i in range(3,l,2):
+        if n%i <1: return False
+    return True
+
+
+
+for i in range(3, limit, 2):
+    if (i not in answers) and (primeCheck(i)):
+        # this is a unique prime
+        temp = {i}
+        isCircle = True
+        # loop through each combination
+        for j in range(len(str(i))-1):
+            k = int(str(i)[j+1:] + str(i)[:j+1])
+            if (isCircle) and (k not in answers) or (k not in temp):
+                if primeCheck(k):
+                    temp.add(k)
+                else:
+                    isCircle = False
+        if isCircle:
+            print("%i is new, unique circle prime" % (i) )
+            # add all of the primes to the the answers
+            for a in temp:
+                answers.add(a)
+##print(answers)
 print(len(answers))
