@@ -5,6 +5,12 @@ There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73
 
 How many circular primes are there below one million?
 """
+import time
+
+## Improve by flagging primes to be checked later,
+## so that we only pass through all the digits once
+
+start = time.time()
 
 limit = 1_000_000 #million
 answers = {2} #start with 2
@@ -39,5 +45,6 @@ for i in range(3, limit, 2):
             # add all of the primes to the the answers
             for a in temp:
                 answers.add(a)
-##print(answers)
+
 print(len(answers))
+print(time.time()-start)
