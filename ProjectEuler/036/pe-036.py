@@ -8,9 +8,10 @@ in base 10 and base 2.
 leading zeros.)
 """
 
-# theyre always odd, because even will end with a 0 in binary
+# an even number will end with a 0 in binary, which cannon be reversed
+# all solutions must be odd
 
-limit = 100
+limit = 1_000_000
 answers = set()
 
 def isPalindromic( f ):
@@ -24,9 +25,6 @@ for i in range(1, limit, 2):
         b = bin(i)[2:]
         if isPalindromic(b):
             answers.add(i)
-##    
-##    # binary
-##    b = bin(i)[2:]
-##    print(b, b[::-1])
 
 print(answers)
+print("sum: %i" %( sum(answers) ))
