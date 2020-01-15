@@ -10,10 +10,23 @@ to right and right to left.
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 """
 
-## this brute force checks every number
-## im only interested 
+# 37
+# 53
+# 73
+# 313
+# 317
+# 373
+# 797
+# 3137
+# 3797
 
-limit = 10 # only searching for 11 numbers
+## this brute force checks every number
+## start with 1 digit prime
+## 1-9 on left, 1-9 on right -- ## keep primes
+## previous answers, 1-9 on right, 1-9 on left
+
+
+limit = 11 # only searching for 11 numbers
 answers = set()
 primes = set()
 
@@ -29,7 +42,6 @@ def primeCheck(n):
         if n%i <1: return False
     return True
 
-n = 11 # single digit primes don't count, 10 +1
 
 def truncPrime(n):
     t = str(n)
@@ -39,17 +51,31 @@ def truncPrime(n):
     return True
 
 
-
-
+for i in range(2, 10):
+    if primeCheck(i):
+        primes.add(i)
 
 while limit > 0:
-    if primeCheck( n ):
-        primes.add(n)
-        if truncPrime( n ):
-            limit -=1
-            answers.add( n )
-            print(n)
-    n += 2
-print(n)
+    newPrimes = set()
+    for p in primes:
+        for i in range(1,10):
+            a = str(i)+str(p)
+            b = str(p)+str(i)
+            if primeCheck( a ):
+                newPrimes.add( a )
+                if a not in answers and truncPrime( a ):
+                    print("found: %s" % a)
+                    print(len( primes ))
+                    limit -= 1
+                    answers.add( a )
+            if primeCheck( b ):
+                newPrimes.add( b )
+                if b not in answers and truncPrime( b ):
+                    print("found: %s" % b)
+                    print(len( primes ))
+                    limit -= 1
+                    answers.add( b )
+##    print(newPrimes)
+    primes = newPrimes
+
 print(answers)
-print(len(primes))
