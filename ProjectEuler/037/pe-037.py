@@ -10,23 +10,13 @@ to right and right to left.
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 """
 
-# 37
-# 53
-# 73
-# 313
-# 317
-# 373
-# 797
-# 3137
-# 3797
-
-## this brute force checks every number
-## start with 1 digit prime
-## 1-9 on left, 1-9 on right -- ## keep primes
-## previous answers, 1-9 on right, 1-9 on left
+## start with set containing 1-digit primes
+## add 1-9 to the left of the primes
+## if it is prime: keep it in new list, and test for trunc
+## replace primes with new list, repeat
 
 
-limit = 11 # only searching for 11 numbers
+limit = 11
 answers = set()
 primes = set()
 
@@ -34,6 +24,7 @@ primes = set()
 def primeCheck(n):
     n = int(n)
     if n == 1: return False
+    if n == 2: return True
     ## even check
     if n%2<1: return False
     ## only check below square root!
@@ -45,56 +36,34 @@ def primeCheck(n):
 
 def truncPrime(n):
     t = str(n)
+    ## if the first digit isn't prime, it wont work, and this is quick
     if not primeCheck(t[0]): return False
     for i in range(len(t)-1):
-##        if not primeCheck( t[i+1:] ): return False
         if not primeCheck( t[:len(t)-(i+1)]): return False
     return True
 
-
-for i in range(2, 10):
+## set initial prime list
+for i in range(3, 10):
     if primeCheck(i):
         primes.add(i)
-
-print(primes)
 
 while limit > 0:
     newPrimes = set()
     for p in primes:
         for i in range(1,10):
+            ## add 1-9 to the front, and test for prime
             a = str(i)+str(p)
             if primeCheck( a ):
                 newPrimes.add( a )
                 if a not in answers and truncPrime( a ):
                     print("found: %s" % a)
-                    print(len( primes ))
                     limit -= 1
                     answers.add( a )        
     primes = newPrimes
     print(len(primes))
 
-##while limit > 0:
-##    newPrimes = set()
-##    for p in primes:
-##        for i in range(1,10):
-##            a = str(i)+str(p)
-##            b = str(p)+str(i)
-##            if primeCheck( a ):
-##                newPrimes.add( a )
-##                if a not in answers and truncPrime( a ):
-##                    print("found: %s" % a)
-##                    print(len( primes ))
-##                    limit -= 1
-##                    answers.add( a )
-##            if primeCheck( b ):
-##                newPrimes.add( b )
-##                if b not in answers and truncPrime( b ):
-##                    print("found: %s" % b)
-##                    print(len( primes ))
-##                    limit -= 1
-##                    answers.add( b )
-        
-##    print(newPrimes)
-##    primes = newPrimes
-
 print(answers)
+s = 0
+for a in answers:
+    s+= int(a)
+print(s)
