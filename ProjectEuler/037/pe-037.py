@@ -45,8 +45,9 @@ def primeCheck(n):
 
 def truncPrime(n):
     t = str(n)
+    if not primeCheck(t[0]): return False
     for i in range(len(t)-1):
-        if not primeCheck( t[i+1:] ): return False
+##        if not primeCheck( t[i+1:] ): return False
         if not primeCheck( t[:len(t)-(i+1)]): return False
     return True
 
@@ -55,27 +56,45 @@ for i in range(2, 10):
     if primeCheck(i):
         primes.add(i)
 
+print(primes)
+
 while limit > 0:
     newPrimes = set()
     for p in primes:
         for i in range(1,10):
             a = str(i)+str(p)
-            b = str(p)+str(i)
             if primeCheck( a ):
                 newPrimes.add( a )
                 if a not in answers and truncPrime( a ):
                     print("found: %s" % a)
                     print(len( primes ))
                     limit -= 1
-                    answers.add( a )
-            if primeCheck( b ):
-                newPrimes.add( b )
-                if b not in answers and truncPrime( b ):
-                    print("found: %s" % b)
-                    print(len( primes ))
-                    limit -= 1
-                    answers.add( b )
-##    print(newPrimes)
+                    answers.add( a )        
     primes = newPrimes
+    print(len(primes))
+
+##while limit > 0:
+##    newPrimes = set()
+##    for p in primes:
+##        for i in range(1,10):
+##            a = str(i)+str(p)
+##            b = str(p)+str(i)
+##            if primeCheck( a ):
+##                newPrimes.add( a )
+##                if a not in answers and truncPrime( a ):
+##                    print("found: %s" % a)
+##                    print(len( primes ))
+##                    limit -= 1
+##                    answers.add( a )
+##            if primeCheck( b ):
+##                newPrimes.add( b )
+##                if b not in answers and truncPrime( b ):
+##                    print("found: %s" % b)
+##                    print(len( primes ))
+##                    limit -= 1
+##                    answers.add( b )
+        
+##    print(newPrimes)
+##    primes = newPrimes
 
 print(answers)
