@@ -14,7 +14,7 @@ and (1,2,3,4,5).
 What is the largest 1 to 9 pandigital 9-digit number that can be formed as the
 concatenated product of an integer with (1,2, ... , n) where n > 1?
 """
-smallest = 123456789
+##smallest = 123456789
 largest = 987654321
 digits = 10 # 1-9
 
@@ -27,15 +27,27 @@ def checkPanDigital ( v, b ):
             return False
     return True
 
+searching = True
+n = 2
+answer = 0
 
-## count pandigitals backwards
-for i in range( largest, smallest-1, -1 ):
-    if checkPanDigital( i, digits ):
-        j = 1
-        k = 1
-        while j < i:
-            k += 1
-            j += k
-            if i%j == 0:
-                print(i,j)
-        print("*******")
+while searching:
+    if n%100 == 0: print(n) # keep track of search
+    m = 1
+    a = ""
+    building = True
+    while building:
+        if len(a+ str(n*m))>9:
+            building = False
+        else:            
+            a+= str(n*m)
+            m+=1
+    if checkPanDigital( a, digits ):
+        if int(a) > answer:
+            print("FOUND ONE! %s" %(a))
+            answer = int(a)
+    if int(a) > largest:
+        searching = False
+    n+=1
+
+print( answer )
