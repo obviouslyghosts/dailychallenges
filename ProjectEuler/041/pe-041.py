@@ -6,16 +6,8 @@ is also prime.
 What is the largest n-digit pandigital prime that exists?
 """
 import itertools
-digits = 987654321
 
-def checkPanDigital ( v, b ):
-    s = str(v)
-    if len(s) < b-1: return False
-    if len(s) > b-1 : return False
-    for i in range(1,b):
-        if not (len([x for x in s if x == str(i)]) == 1):
-            return False
-    return True
+largest = 987654321
 
 def primeCheck(n):
     n = int(n)
@@ -31,16 +23,13 @@ def primeCheck(n):
 
 def panDigitalPrime(limit):
     limit = str(limit)
-    for i in range(len(limit)):
-        for d in itertools.permutations(str(i), len(str(i))):
-            ## d is the permutations
-
-    # for i in range(1, limit):
-    #     if checkPanDigital(i, digits):
-    #         print(i)
-    #         if primeCheck(i):
-    #             print("FOUND")
-    #             return i
+    for i in range( len(limit) ):
+        # starting at the largest, and counting down
+        # check all permutations of the pandigital number
+        for d in itertools.permutations(limit[i:], len(limit[i:])):
+            d = int("".join(k for k in d))
+            if primeCheck(d):
+                return d
     return 0
 
 print("searching for pandigital Primes...")
