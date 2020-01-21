@@ -15,10 +15,15 @@ containing nearly two-thousand common English words, how many are triangle words
 
 import string
 import os
-import codecs # special characters
+import csv
 
-alpha = [i for i in string.ascii_lowercase]
+alpha = [i for i in string.ascii_lowercase] #abc...xyz
 triangles = [1]
+
+file = "p042_words.txt"
+path = os.path.abspath(os.curdir)
+filePath = os.path.join(path, file)
+
 
 def wordScore( word ):
     score = 0
@@ -33,44 +38,20 @@ def triangleNumberCheck( number ):
     if number in triangles: return True
     return False
 
-w = "hello"
 
-print(triangleNumberCheck(wordScore(w)))
+ans = 0
+if os.path.isfile(filePath):
+    print("lets do this")
 
+    with open(filePath, newline='') as openFile:
+        reader = csv.reader(openFile, delimiter=',')
+        for row in reader:
+            for word in row:
+                score = wordScore(word.lower())
+                if triangleNumberCheck(score):
+                    print(word)
+                    ans+=1
+else:
+    print("not a file")
 
-# import csv
-# import os
-# import codecs # special characters
-
-# f = 'C:/Users/Work/Desktop/test.csv'
-# fPath = os.path.abspath(os.curdir)
-# print(fPath)
-
-
-def ReadFile(filePath):
-    # check that its actual a file path
-    if os.path.isfile(filePath):
-        print("lets do this")
-        #
-        # fPath = os.path.dirname(filePath)
-        # fPath = os.path.join(fPath, folder)
-
-        # check if the path exists
-        # if not os.path.isdir(fPath):
-        #     # the path needs to be created
-        #     os.mkdir(fPath)
-
-        with open(filePath, newline='') as openFile:
-            # fData = csv.reader(openFile, delimiter=',')
-            fData = openFile.readlines()
-            print(len(fData))
-            # it reads as a single line... :(
-            # and it's keeping all the "" and ,
-            for d in fData:
-                print(d)
-    else:
-        print("not a file")
-
-f = r"C:\Users\Ryan\Projects\ObviouslyGhosts\CODE\dailychallenges\ProjectEuler\042\p042_words.txt"
-# f = "Hello"
-ReadFile( f )
+print(ans)
