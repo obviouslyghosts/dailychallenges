@@ -22,7 +22,14 @@ largest = 9876543210
 answers = set()
 
 
-for d in itertools.permutations(largest[i:], len(largest[i:])):
-    d = int("".join(k for k in d))
+def sliceable( digits ):
     ## string slice across, check if (%n+1) == 0
     ## if the whole string can do this, then save it out!
+
+    return False
+
+
+for d in itertools.permutations(largest[i:], len(largest[i:])):
+    d = int("".join(k for k in d))
+    if sliceable( d ):
+        answer.add( d )
