@@ -15,3 +15,14 @@ d7d8d9=728 is divisible by 13
 d8d9d10=289 is divisible by 17
 Find the sum of all 0 to 9 pandigital numbers with this property.
 """
+
+import itertools
+
+largest = 9876543210
+answers = set()
+
+
+for d in itertools.permutations(largest[i:], len(largest[i:])):
+    d = int("".join(k for k in d))
+    ## string slice across, check if (%n+1) == 0
+    ## if the whole string can do this, then save it out!
