@@ -13,9 +13,26 @@ value of D?
 
 """
 
+pentagonalNumbers = list()
+searching = True
 
 def getPentagonalNumber( n ):
-    return int( n*(3*n - 1)/2 )
+    print(n, len(pentagonalNumbers))
+    while (n > len(pentagonalNumbers)):
+        pentagonalNumbers.append( int( n*(3*n - 1)/2 ) )
+    print(n, pentagonalNumbers)
+    return pentagonalNumbers[n-1]
 
-for i in range(1, 11):
-    print(getPentagonalNumber(i))
+def testPentNum( r ):
+    if r > 1:
+        for i in range(1, r):
+            print(getPentagonalNumber(i))
+
+i = 1
+while searching:
+    a = getPentagonalNumber( i )
+    for n in range(1,i):
+        b = getPentagonalNumber( n )
+        print(a,b)
+    i+= 1
+    if i > 3: searching = False
