@@ -19,27 +19,27 @@ Find the sum of all 0 to 9 pandigital numbers with this property.
 import itertools
 
 largest = "9876543210"
-answers = set()
+answers = list()
 primes =[2,3,5,7,11,13,17]
 
-def sliceable( digits ):
+def isSliceable( digits ):
     digits = str( digits )
-    for i in range((len(digits)//3)*2):
+    i=0
+    while (i+4 <= len(digits)):
         d = int( digits[i+1:i+4] )
-##        print(digits, d, primes[i])
         if ( d % primes[i] ) != 0: return False
-##        if not primeCheck( digits[i+1:i+3]): return False
-    ## string slice across, check if (%n+1) == 0
-    ## if the whole string can do this, then save it out!
+        i+=1
     print( digits )
     return True
 
 
 
 for d in itertools.permutations(largest, len(largest)):
-    d = int("".join(k for k in d))
-    if sliceable( d ):
-        answers.add( d )
+    # catch anything that starts with a 0
+    if d[0] != "0":
+        d = int("".join(k for k in d))
+        if isSliceable( d ):
+            answers.append( d )
 
 print( answers )
 ans = sum([a for a in answers])
