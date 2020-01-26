@@ -17,22 +17,51 @@ pentagonalNumbers = list()
 searching = True
 
 def getPentagonalNumber( n ):
-    print(n, len(pentagonalNumbers))
-    while (n > len(pentagonalNumbers)):
-        pentagonalNumbers.append( int( n*(3*n - 1)/2 ) )
-    print(n, pentagonalNumbers)
-    return pentagonalNumbers[n-1]
+    return int( n*(3*n - 1)/2 )
+    # # print(n, len(pentagonalNumbers))
+    # while (n > len(pentagonalNumbers)):
+    #     pentagonalNumbers.append( int( n*(3*n - 1)/2 ) )
+    # # print(n, pentagonalNumbers)
+    # return pentagonalNumbers[n-1]
 
 def testPentNum( r ):
     if r > 1:
         for i in range(1, r):
             print(getPentagonalNumber(i))
 
+def pentCheck( n ):
+    if n == 0: return False
+    if n == 1: return True
+    c = (0.25) - (6 * (-n))
+    a = ( 0.5 + (c**.5) )
+    b = ( 0.5 - (c**.5) )
+    # print(a,b)
+    # print(type(a))
+    if type(a) != complex:
+        if a.is_integer(): return True
+    if type(b) != complex:
+        if b.is_integer(): return True
+    return False
+
 i = 1
+s = 5
+
+# second loop should only be as great as the min so far
+# ans = 40
+# search: (n-m>=0) & range(i, a-min, -1)
+# how do I identify an upper bounds to search?
+# when the steps are bigger than the min
+# check a against previous, if step is too big, cut it off
+
 while searching:
     a = getPentagonalNumber( i )
-    for n in range(1,i):
-        b = getPentagonalNumber( n )
-        print(a,b)
+    for n in range(i,1, -1):
+        b = getPentagonalNumber( n+1 )
+        # print(a,b, (a+b), (a-b))
+        if pentCheck(a+b) and pentCheck(a-b):
+            print(a,b, (a+b), (a-b))
+            s-=1
+            if s <=0: searching = False
+        # if (a+b) in pentagonalNumbers
     i+= 1
-    if i > 3: searching = False
+    # if i > 10: searching = False
