@@ -15,6 +15,7 @@ value of D?
 
 pentagonalNumbers = list()
 searching = True
+min = 0
 
 def getPentagonalNumber( n ):
     return int( n*(3*n - 1)/2 )
@@ -45,7 +46,6 @@ def pentCheck( n ):
 
 i = 1
 s = 5
-
 # second loop should only be as great as the min so far
 # ans = 40
 # search: (n-m>=0) & range(i, a-min, -1)
