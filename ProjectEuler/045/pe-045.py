@@ -27,7 +27,7 @@ def Triangle(n):
 def PentCheck( n ):
     if n == 0: return False
     if n == 1: return True
-    c = (0.25) - (8 * (-n))
+    c = (0.25) - (6 * (-n))
     a = ( 0.5 + (c**.5) )
     if type(a) != complex:
         if (a/3).is_integer(): return True
@@ -42,19 +42,13 @@ def HexCheck( n ):
         if (a).is_integer(): return True
     return False
 
-saftey = 1000
-
 while searching:
-    t = Triangle(i)
+    t = int(Triangle(i))
     if PentCheck(t) and HexCheck(t):
         print(t)
         answers.append( t )
         if t > bound: searching = False
-    saftey-=1
-    if saftey <= 0:
-        print("short")
-        searching = False
     i+=1
 
 print(answers)
-print(t)
+print( t )
