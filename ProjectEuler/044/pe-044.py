@@ -27,11 +27,8 @@ def pentCheck( n ):
     c = (0.25) - (6 * (-n))
     a = ( 0.5 + (c**.5) )
     b = ( 0.5 - (c**.5) )
-    print(a,b,n)
     if type(a) != complex:
-        if a.is_integer() and abs(a) < n: return True
-    if type(b) != complex:
-        if b.is_integer() and abs(b) <= n: return True
+        if (a/3).is_integer(): return True
     return False
 
 ia = 1
