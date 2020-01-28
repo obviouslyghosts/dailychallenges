@@ -26,7 +26,6 @@ def pentCheck( n ):
     if n == 1: return True
     c = (0.25) - (6 * (-n))
     a = ( 0.5 + (c**.5) )
-    b = ( 0.5 - (c**.5) )
     if type(a) != complex:
         if (a/3).is_integer(): return True
     return False
@@ -44,7 +43,7 @@ while searching:
             ans = min
         ib -= 1
         b = getPentagonalNumber( ib )
-    if (getPentagonalNumber( ia + 1)-a) > min:searching = False
+    if (getPentagonalNumber( ia + 1)-a) > min: searching = False
     ia += 1
 
 print(ans)
