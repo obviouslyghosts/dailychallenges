@@ -15,17 +15,6 @@ What is the smallest odd composite that cannot be written as the sum of a
 prime and twice a square?
 """
 
-# 9 = 7 + 2x1**2
-# 15 = 7 + 2x2**2
-# 21 = 2 + 2x3**2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-# 25 = 7 + 2x3**2
-# 27 = 19 + 2x2**2
-# 33 = 31 + 2x1**2
-# 35 = 2 + 2x4**2
-# 39 = 7 + 2x4**2
-# 45 = 13 + 2x4**2
-# 49 = 17 + 2x4**2
-
 searching = True
 lim = 10
 
@@ -44,23 +33,19 @@ def PrimeCheck(n):
 def ScanPrimes( i ):
     num = i
     for i in range(1, i, 1):
-##        print(i)
         if PrimeCheck(i):
-            b = int((num-i)/2)
-##            print(b)
+            b = (num-i)/2
             b = b**0.5
-##            print(b)
             if b.is_integer() and b > 0 and b < num:
                 return i
     return -1
 
 n = 3
 while searching:
-##    print(n)
     if not PrimeCheck(n):
-##        print(n)
         p = ScanPrimes( n )
-        print("%i = %i + 2x%i**2" %(n, p, int(((n-p)/2)**0.5)))
-        lim -= 1
-    if lim<=0: searching=False
+        if p < 0:
+            print("BROKE")
+            print("%i = %i + 2x%i**2" %(n, p, int(((n-p)/2)**0.5)))
+            searching = False
     n += 2
