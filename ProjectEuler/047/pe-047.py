@@ -22,11 +22,26 @@ isSearching = True
 lim = 1000
 ans = list()
 n=1
+fac = 2
 
+
+# write factoring function
 def HasPrimeFactors(n):
-    for i in range(2,)
+    if n <= 2: return False
+    f = list()
+    factoring = True
+    while factoring:
+        for i in range(2,n):
+            if n%i==0:
+                n=int(n/i)
+                f.append(i)
+        factoring = False
+
+    if len(f) == fac: return
     return False
 
+
+# main loop
 while isSearching:
     if HasPrimeFactors(n):
         ans.append(n)
