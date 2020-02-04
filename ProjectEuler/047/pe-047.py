@@ -22,35 +22,46 @@ isSearching = True
 lim = 1000
 ans = list()
 n=1
-fac = 2
+limit = 2
 
+def PrimeCheck(n):
+    n = int(n)
+    if n == 1: return False
+    if n == 2: return True
+    ## even check
+    if n%2<1: return False
+    ## only check below square root!
+    l = int(n**0.5)+1
+    for i in range(3,l,2):
+        if n%i <1: return False
+    return True
 
 # write factoring function
-def HasPrimeFactors(n):
-    if n <= 2: return False
-    f = list()
-    factoring = True
-    while factoring:
-        for i in range(2,n):
-            if n%i==0:
-                n=int(n/i)
-                f.append(i)
-        factoring = False
+def Factor(n, short):
+    facs = list()
+    if n <=1: return [1]
+    for i in range(2,n):
+        if n%i==0:
+            facs.append(i)
+            n=n//i
+            if len(facs)>=short: return[1]
+    if len(facs) <1: return[1, n]
+    return facs
 
-    if len(f) == fac: return
-    return False
 
+for i in range(25):
+    print(i, Factor(i, limit))
 
 # main loop
-while isSearching:
-    if HasPrimeFactors(n):
-        ans.append(n)
-    elif len(ans)>0:
-        ans = list()
-    n+=1
-    lim -=1
-    if len(ans)>=4:searching = False
-    if lim <=0: isSearching = False
+# while isSearching:
+#     factors = Factor(n,limit)
+#     if len(factors)== limit:
+#         for f in factors:
+#
+#     n+=1
+#     lim -=1
+#     if len(ans)>=4:searching = False
+#     if lim <=0: isSearching = False
 
 print("Complete")
 print(ans)
