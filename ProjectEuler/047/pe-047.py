@@ -19,10 +19,8 @@ each. What is the first of these numbers?
 # save in queue if great
 
 isSearching = True
-lim = 1000
 ans = list()
-n=1
-limit = 2
+limit = 3
 
 def PrimeCheck(n):
     n = int(n)
@@ -36,7 +34,6 @@ def PrimeCheck(n):
         if n%i <1: return False
     return True
 
-# write factoring function
 def Factor(n, short):
     facs = list()
     if n <=1: return [1]
@@ -44,24 +41,25 @@ def Factor(n, short):
         if n%i==0:
             facs.append(i)
             n=n//i
-            if len(facs)>=short: return[1]
+            if len(facs)>short: return[1]
     if len(facs) <1: return[1, n]
     return facs
 
 
-for i in range(25):
-    print(i, Factor(i, limit))
-
-# main loop
-# while isSearching:
-#     factors = Factor(n,limit)
-#     if len(factors)== limit:
-#         for f in factors:
+num=1
+while isSearching:
+    factors = Factor(num,limit)
+    if len(factors) == limit:
+        if all([PrimeCheck(f) for f in factors]):
+            print(num, "passed")
+            ans.append(num)
+        else:
+            ans = list()
+    else:
+        ans = list()
+    num += 1
+    if len(ans)>=limit:isSearching = False
 #
-#     n+=1
-#     lim -=1
-#     if len(ans)>=4:searching = False
-#     if lim <=0: isSearching = False
 
 print("Complete")
 print(ans)
