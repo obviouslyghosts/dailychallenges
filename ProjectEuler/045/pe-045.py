@@ -16,6 +16,8 @@ Find the next triangle number that is also pentagonal and hexagonal.
 ## save number
 ## if greater than 40755, end
 
+## lower bound is the first 4 prime numbers multiplied
+
 searching = True
 answers = list()
 bound = 40755
