@@ -14,13 +14,20 @@ Find the first four consecutive integers to have four distinct prime factors
 each. What is the first of these numbers?
 """
 
+# 134045 just one more!
+# Complete
+# [134043, 134044, 134045, 134046]
+# [Finished in 761.125s]
+
+
+
 # count up
 # get prime factors
 # save in queue if great
 
 isSearching = True
 ans = list()
-limit = 3
+limit = 4
 
 def PrimeCheck(n):
     n = int(n)
@@ -35,8 +42,8 @@ def PrimeCheck(n):
     return True
 
 def Factor(n, short):
-    facs = list()
     if n <=1: return [1]
+    facs = list()
     for i in range(2,n):
         if n%i==0:
             facs.append(i)
@@ -51,8 +58,9 @@ while isSearching:
     factors = Factor(num,limit)
     if len(factors) == limit:
         if all([PrimeCheck(f) for f in factors]):
-            print(num, "passed")
             ans.append(num)
+            if len(ans)==limit-2: print(num, "just two more!")
+            if len(ans)==limit-1: print(num, "just one more!")
         else:
             ans = list()
     else:
