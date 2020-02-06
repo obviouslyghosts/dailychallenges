@@ -27,7 +27,7 @@ each. What is the first of these numbers?
 # lowerbound is n number of primes multiplied
 
 isSearching = True
-limit = 4
+limit = 3
 primes = list()
 
 def PrimeCheck(n):
